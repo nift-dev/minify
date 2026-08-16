@@ -64,3 +64,28 @@ If a bug reveals a general scanner/context lesson, update TESTING or DECISIONS.
 An ordinary isolated mistake normally needs a regression and code fix, not a
 historical essay. Reassess production priorities whenever new syntax interactions
 or corpus failures appear.
+
+## Reference checkpoint: fuzz evidence changed the roadmap
+
+The 2026-08 production audit began as sanitizer/fuzz tooling work, then paused
+when successful first-pass minification produced output rejected on a second
+pass. Each finding was minimized, expanded into its behavioral family, fixed at
+the relevant language boundary, and retained before the interrupted campaign
+resumed. This exposed CSS comment-delimiter synthesis, a JSX-significant opener,
+and HTML/XML comment/CDATA opener synthesis. The resumed campaign ultimately
+completed 70,000 deterministic mutations across seven formats under normal and
+sanitized builds.
+
+Preserve the method, not merely the specimens:
+
+1. Let evidence revise checkpoint priority.
+2. Minimize the failure and identify the behavioral family.
+3. Retain an exact regression and a broader property where justified.
+4. Fix the semantic/token boundary rather than special-casing one input.
+5. Resume the interrupted validation campaign.
+6. Make readiness claims only after all relevant gates are green.
+7. Feed the result back into the roadmap and living handovers.
+
+The permanent low-risk property is second-pass acceptance after every successful
+first pass. Strict byte idempotence is a separate possible contract and must not
+be inferred without a deliberate seven-format audit.

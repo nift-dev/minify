@@ -100,10 +100,11 @@ selector/value parsers are installed, compares normalized semantic trees for
 original and minified representative modern stylesheets. It is deliberately
 independent of Minify++ and complements rather than replaces focused exact tests.
 
-The 115-document non-JavaScript corpus, including its Node-backed JSON structural
-oracle, passed in an unrestricted process environment during the production audit.
-The desktop process wrapper may stall that final `spawnSync` oracle; rerun it
-outside that wrapper rather than silently omitting the result.
+The 115-document non-JavaScript corpus includes a Node-backed JSON structural
+oracle. Native minification is orchestrated by the shell and Node reads completed
+files, avoiding nested child-process assumptions in desktop/CI wrappers. The CSS
+semantic oracle uses the same arrangement. Do not reintroduce Node `spawnSync`
+without validating it in the supported process-supervision environments.
 
 ## Embedded synchronization
 

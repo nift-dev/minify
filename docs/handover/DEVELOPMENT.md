@@ -23,6 +23,11 @@ changed. If performance is in scope, capture a comparable baseline first.
     run embedded Minify++ plus Nift integration/contract tests.
 12. Reconcile README, ReleaseNotes, website, handovers, and roadmap.
 
+Keep test orchestration portable across process supervisors. Where Node supplies
+a parser/runtime oracle and a native driver supplies transformation output, prefer
+shell-owned native execution followed by Node reading completed files. This avoids
+nested-process stalls without weakening the oracle or adding environment skips.
+
 Avoid combining a compression tweak with unrelated scanner architecture changes.
 Avoid regex or token shortcuts that do not model the relevant context. Do not add
 general compilation behavior because JSX/TSX syntax appears in the corpus.

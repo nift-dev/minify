@@ -31,7 +31,7 @@ Reorder or retire these items as implementation evidence changes.
   including 15,459 executable JavaScript programs, 180 JSX/TSX programs, and the
   111-document non-JavaScript corpus with JSON structural comparison. The latter
   was rerun successfully outside the desktop stream wrapper.
-- **COMPLETE — synchronization evidence:** an 18-file standalone/Nift equality
+- **COMPLETE — synchronization evidence:** a 19-file standalone/Nift equality
   gate now makes embedded drift machine-checkable.
 - **COMPLETE — bounded CLI hardening:** checked reads distinguish failure from
   empty input; sibling-temporary replacement preserves existing permission bits,
@@ -39,11 +39,14 @@ Reorder or retire these items as implementation evidence changes.
 - **COMPLETE — native/tooling evidence:** repeatable sanitizer, 70,000-case
   fuzz-smoke, and performance/output-size/RSS targets are green. The fuzz gate
   exposed three token-manufacturing families, now fixed and retained.
-- **PLANNED — clean package/platform evidence:** prove a source-only checkout,
-  document the validated host/toolchain, and keep broader platform claims bounded.
-- **PLANNED — public reconciliation:** correct the website's stale 39-document
-  claim to the current 111-document evidence and publish only defensible maturity
-  language.
+- **COMPLETE — clean package evidence:** the committed source archive builds and
+  passes the full suite without developer-local or generated inputs; `distcheck`
+  makes the workflow repeatable.
+- **COMPLETE — public reconciliation:** the website reflects the 111-document and
+  70,000-case evidence plus current CLI transaction behavior.
+- **KNOWN LIMITATION — platform evidence:** Linux x86-64 with g++ 15.2.0, Node
+  22.22.1, and tsc 7.0.2 is directly validated. macOS and Windows remain explicit
+  release-evidence gaps rather than inferred support claims.
 
 ## Production-ready meaning
 
@@ -73,9 +76,10 @@ future syntax.
 8. Reconcile documentation, website maturity language, limits, tests, and claims.
 9. Validate a clean release-like package and decide production status with Nick.
 
-The current maturity assessment is “substantial hardening evidence, but production
-confidence should be re-earned from current corpus/safety results,” not a fixed
-percentage.
+The current readiness decision is **PASS WITH KNOWN LIMITATIONS** for the documented
+conservative format/API/CLI contract on the directly validated Linux toolchain.
+See `PRODUCTION-READINESS.md`. Reopen the decision when supported syntax, scanner
+semantics, CLI commit behavior, platform claims, or significant evidence changes.
 
 ## After production
 

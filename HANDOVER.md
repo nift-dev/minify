@@ -47,7 +47,7 @@ explained and tested.
   public API.
 
 At this checkpoint, standalone and embedded `Minify.cpp` and `Minify.h` are
-byte-identical. The mirrored 18-file standalone contract can be checked with
+byte-identical. The mirrored 19-file standalone contract can be checked with
 `make check-nift-sync NIFT_MINIFYPP_DIR=/path/to/nift/minifypp`. Standalone
 Minify++ is the intended canonical project identity;
 changes should originate here, pass standalone validation, be synchronized into
@@ -117,6 +117,8 @@ changes without explicit approval.
 - `docs/handover/TESTING.md`: semantic, adversarial, corpus, and safety strategy.
 - `docs/handover/DECISIONS.md`: settled/rejected/unresolved boundaries.
 - `docs/handover/ROADMAP.md`: living production-readiness risk assessment.
+- `docs/handover/PRODUCTION-READINESS.md`: current evidence-backed readiness
+  decision, scope, limitations, and reopening conditions.
 - `docs/handover/PROJECT-HISTORY.md`: detailed Minify++ history and
   institutional context, including production definition, per-format risks, testing,
   integration, and roadmap history.

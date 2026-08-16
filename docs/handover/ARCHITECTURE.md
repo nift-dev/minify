@@ -166,7 +166,7 @@ durability across power loss and ownership/timestamp preservation are not claime
 
 ### Verified Nift relationship
 
-The 18 mirrored standalone contract files—source, public header, private JSON
+The 19 mirrored standalone contract files—source, public header, private JSON
 parser, CLI, Makefile, README, release notes, sync script, and all tests—are
 currently byte-identical to their counterparts under Nift's minifypp subtree.
 The embedded directory additionally contains local build artifacts. Run

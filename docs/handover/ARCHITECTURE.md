@@ -77,8 +77,9 @@ These are pressures to monitor rather than automatic redesign tasks:
 - JavaScript/JSX logic risks becoming an implicit partial parser whose grammar is
   difficult to reason about; respond with precise structural understanding,
   conservative transforms, and evidence rather than a universal scanner abstraction;
-- CLI direct writes, especially `--in-place`, lack sibling-temporary/rename commit
-  protection, and read failures need to remain distinguishable from valid empty input;
+- CLI writes use a sibling temporary directory and replacement commit, preserve
+  existing permission bits, and reject symbolic-link destinations; broader
+  platform rename/durability evidence remains a release concern;
 - standalone and embedded byte equality is enforced on demand by the explicit
   16-file `check-nift-sync` gate; running it remains a checkpoint responsibility;
 - structured error offsets may eventually improve CLI/Nift diagnostics without
@@ -154,17 +155,14 @@ The CLI verifies regular-file status and extension before minification. It reads
 the entire file, runs the library, then writes the destination. Library errors
 clear output for the principal malformed-input paths and propagate to the CLI.
 
-The inherited transaction ideal is not fully implemented in the standalone CLI:
-write_file opens the final destination directly with truncation. In-place input is
-not truncated until after successful in-memory minification, which protects parse
-failures, but a partial write, disk-full condition, or write failure can still
-damage an existing input or destination. No temporary-file/rename commit or
-permission-preservation layer currently exists. Treat this as a real hardening
-item, not as verified atomic behavior.
-
-read_file does not directly test stream-open/read status after the preceding
-regular-file check. An unreadable or mid-read-failing file can therefore be
-misrepresented as empty input. This also belongs in CLI hardening.
+The standalone CLI checks stream-open/read state independently from regular-file
+classification, so unreadable input is not mistaken for valid empty input. It
+prepares complete output in a unique sibling temporary directory, preserves an
+existing destination's permission bits, and commits by rename. Platforms whose
+standard rename cannot replace an existing file use a recoverable backup/restore
+fallback. Symbolic-link destinations are rejected explicitly rather than followed
+or silently replaced. This provides a strong file-level commit boundary, while
+durability across power loss and ownership/timestamp preservation are not claimed.
 
 ### Verified Nift relationship
 

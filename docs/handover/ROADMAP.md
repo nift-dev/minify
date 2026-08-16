@@ -33,8 +33,9 @@ Reorder or retire these items as implementation evidence changes.
   was rerun successfully outside the desktop stream wrapper.
 - **COMPLETE — synchronization evidence:** a 16-file standalone/Nift equality
   gate now makes embedded drift machine-checkable.
-- **PLANNED — bounded CLI hardening:** distinguish file read failure from valid
-  empty input and replace direct truncating writes with a safe commit model.
+- **COMPLETE — bounded CLI hardening:** checked reads distinguish failure from
+  empty input; sibling-temporary replacement preserves existing permission bits,
+  rejects symbolic-link destinations, and has CLI regression coverage.
 - **PLANNED — native/tooling evidence:** add repeatable sanitizer, fuzz-smoke,
   performance/RSS, and clean-checkout gates before the readiness decision.
 - **PLANNED — public reconciliation:** correct the website's stale 39-document

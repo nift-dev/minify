@@ -93,6 +93,14 @@ changes. It compares the explicit mirrored file set and fails on missing or
 different files. Nift-specific integration behavior still requires Nift's own
 tests; byte equality is necessary but not sufficient.
 
+## CLI file transactions
+
+The CLI smoke layer protects valid empty reads, a Linux unreadable-regular-file
+probe where `/proc/kcore` is available, in-place permission preservation,
+malformed-input preservation, symbolic-link refusal, and non-regular destination
+rejection. Keep transformation tests separate: these cases protect file commit
+semantics rather than scanner output.
+
 ## Performance
 
 Measure startup, many small files, large files, per-format throughput, peak RSS,

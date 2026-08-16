@@ -25,6 +25,22 @@ converted inherited concerns into concrete roadmap work:
 
 Reorder or retire these items as implementation evidence changes.
 
+## Current checkpoint status
+
+- **COMPLETE — production-readiness audit:** all current standalone gates pass,
+  including 15,459 executable JavaScript programs, 180 JSX/TSX programs, and the
+  111-document non-JavaScript corpus with JSON structural comparison. The latter
+  was rerun successfully outside the desktop stream wrapper.
+- **COMPLETE — synchronization evidence:** a 16-file standalone/Nift equality
+  gate now makes embedded drift machine-checkable.
+- **PLANNED — bounded CLI hardening:** distinguish file read failure from valid
+  empty input and replace direct truncating writes with a safe commit model.
+- **PLANNED — native/tooling evidence:** add repeatable sanitizer, fuzz-smoke,
+  performance/RSS, and clean-checkout gates before the readiness decision.
+- **PLANNED — public reconciliation:** correct the website's stale 39-document
+  claim to the current 111-document evidence and publish only defensible maturity
+  language.
+
 ## Production-ready meaning
 
 A developer should be able to run Minify++ deliberately on documented supported

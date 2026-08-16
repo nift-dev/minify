@@ -79,8 +79,8 @@ These are pressures to monitor rather than automatic redesign tasks:
   conservative transforms, and evidence rather than a universal scanner abstraction;
 - CLI direct writes, especially `--in-place`, lack sibling-temporary/rename commit
   protection, and read failures need to remain distinguishable from valid empty input;
-- standalone and embedded byte equality is process knowledge rather than an
-  automated invariant;
+- standalone and embedded byte equality is enforced on demand by the explicit
+  16-file `check-nift-sync` gate; running it remains a checkpoint responsibility;
 - structured error offsets may eventually improve CLI/Nift diagnostics without
   requiring a large error hierarchy.
 
@@ -168,12 +168,13 @@ misrepresented as empty input. This also belongs in CLI hardening.
 
 ### Verified Nift relationship
 
-Every tracked standalone project file—source, public header, private JSON parser,
-CLI, Makefile, README, release notes, and all tests—is currently byte-identical to
-its counterpart under Nift's minifypp subtree. The embedded directory additionally
-contains local build artifacts. Current history does not provide a synchronization
-script or separate provenance trail, so canonical standalone ownership remains a
-process intention backed by present equality rather than an enforced invariant.
+The 16 mirrored standalone contract files—source, public header, private JSON
+parser, CLI, Makefile, README, release notes, sync script, and all tests—are
+currently byte-identical to their counterparts under Nift's minifypp subtree.
+The embedded directory additionally contains local build artifacts. Run
+`make check-nift-sync NIFT_MINIFYPP_DIR=/path/to/nift/minifypp` at synchronization
+checkpoints. Standalone-only handovers and repository configuration are excluded
+deliberately rather than treated as drift.
 
 Nift compiles minifypp/src/Minify.cpp directly into its executable and includes
 only the public header at the semantic boundary. ProjectInfo validates configured
@@ -207,10 +208,10 @@ In this reconciliation, the focused C++ smoke test, Node semantic differential,
 15,459-program generated JavaScript corpus, cross-format adversarial gate, CLI
 smoke, and Nift integration smoke passed. After tsc 7.0.2 became available, the
 generated JSX/TSX gate also passed all 180 programs. The native 111-document
-idempotence loop progressed through all cases, but its final Node spawnSync JSON
-oracle hung under the Codex sandbox's stream restrictions; that is an environment
-limitation rather than a recorded product failure and must be rerun in an
-unrestricted normal environment.
+idempotence loop and its final Node `spawnSync` JSON structural oracle pass in an
+unrestricted process environment. The same oracle can stall under the Codex
+desktop process wrapper's stream restrictions; retain that as an execution-
+environment limitation, not a skipped product result.
 
 There are no checked-in benchmark sources or Make targets for benchmarks,
 sanitizers, or fuzzing in the standalone repository. The architecture's performance
@@ -232,11 +233,9 @@ It was stale or incomplete in four important ways:
 4. Atomic output replacement, sanitizer/fuzz targets, and retained benchmarks are
    desired architecture but not current implementation.
 
-The highest-value next architecture work is to make standalone-to-embedded equality
-machine-checkable, harden file read and atomic replacement semantics, run the
-skipped JSX and sandbox-blocked JSON oracle in a normal environment, and establish
-sanitizer/fuzz/performance targets. Scanner semantic changes should still begin
-with evidence, not rewrites.
+The highest-value next architecture work is to harden file reads and atomic
+replacement semantics and establish sanitizer/fuzz/performance targets. Scanner
+semantic changes should still begin with evidence, not rewrites.
 
 ## Product and architectural boundary
 

@@ -53,10 +53,14 @@ old format contracts, added the relevant hostile family, passed real/corpus and
 safety evidence, maintained performance, synchronized Nift, and left docs/site
 truthful. The newest code remains working state until that evidence is complete.
 
+Use these living statuses where useful: **PLANNED**, **AUDITING**,
+**IMPLEMENTING**, **VALIDATING**, **BLOCKED**, **COMPLETE**, and **SUPERSEDED**.
+They distinguish work not yet attempted from an audit that intentionally found no
+production change necessary; they are descriptive, not process bureaucracy.
+
 ## Living knowledge
 
 If a bug reveals a general scanner/context lesson, update TESTING or DECISIONS.
 An ordinary isolated mistake normally needs a regression and code fix, not a
 historical essay. Reassess production priorities whenever new syntax interactions
 or corpus failures appear.
-

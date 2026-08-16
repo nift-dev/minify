@@ -80,9 +80,21 @@ valid seeds and malformed inputs, detect crashes/hangs/unbounded memory, minimiz
 findings, and convert them into deterministic regressions. Runtime differential
 fuzzing is especially valuable for supported JavaScript.
 
+The 111-document non-JavaScript corpus, including its Node-backed JSON structural
+oracle, passed in an unrestricted process environment during the production audit.
+The desktop process wrapper may stall that final `spawnSync` oracle; rerun it
+outside that wrapper rather than silently omitting the result.
+
+## Embedded synchronization
+
+Run `make check-nift-sync NIFT_MINIFYPP_DIR=/path/to/nift/minifypp` whenever the
+canonical standalone implementation, public surface, tests, or build contract
+changes. It compares the explicit mirrored file set and fails on missing or
+different files. Nift-specific integration behavior still requires Nift's own
+tests; byte equality is necessary but not sufficient.
+
 ## Performance
 
 Measure startup, many small files, large files, per-format throughput, peak RSS,
 and output size using semantically green candidates. Record machine, compiler
 flags, corpus, iterations, and tool versions. Report tradeoffs honestly.
-

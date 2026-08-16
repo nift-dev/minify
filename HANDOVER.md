@@ -47,7 +47,9 @@ explained and tested.
   public API.
 
 At this checkpoint, standalone and embedded `Minify.cpp` and `Minify.h` are
-byte-identical. Standalone Minify++ is the intended canonical project identity;
+byte-identical. The mirrored 16-file standalone contract can be checked with
+`make check-nift-sync NIFT_MINIFYPP_DIR=/path/to/nift/minifypp`. Standalone
+Minify++ is the intended canonical project identity;
 changes should originate here, pass standalone validation, be synchronized into
 Nift, and then pass Nift integration. Document allowed wrapper/build differences
 rather than forcing every file to match.
@@ -70,7 +72,7 @@ adversarial cases, and CLI behavior. Current retained checkpoint evidence includ
 generated non-JavaScript documents. Treat counts as checkpoint evidence, not a
 quality identity.
 
-The Makefile has no named sanitizer or benchmark target. For serious scanner or
+The Makefile has no named sanitizer, fuzz, or benchmark target. For serious scanner or
 semantic changes, construct and record appropriate ASan/UBSan builds and
 representative performance/corpus commands rather than claiming unsupported
 automation.

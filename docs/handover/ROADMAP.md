@@ -27,10 +27,10 @@ Reorder or retire these items as implementation evidence changes.
 
 ## Current checkpoint status
 
-- **REOPENED — production-readiness audit:** a production website CSS failure
-  invalidated the earlier finality claim. The repaired working candidate passes
-  all current standalone gates, including a new independent CSS semantic oracle,
-  but still needs clean-archive and final browser close-out evidence.
+- **COMPLETE — reopened production-readiness audit:** a production website CSS
+  failure invalidated the earlier finality claim. The repaired committed candidate
+  passes all standalone gates, a new independent CSS semantic oracle, clean-archive
+  `distcheck`, synchronized Nift integration, and final browser validation.
 - **COMPLETE — current executable evidence:** all current standalone gates pass,
   including 15,459 executable JavaScript programs, 180 JSX/TSX programs, and the
   115-document non-JavaScript corpus with JSON structural comparison. The latter
@@ -81,9 +81,10 @@ future syntax.
 8. Reconcile documentation, website maturity language, limits, tests, and claims.
 9. Validate a clean release-like package and decide production status with Nick.
 
-The current readiness decision is **REOPENED; REPAIRED CANDIDATE UNDER FINAL
-REVALIDATION**. See `PRODUCTION-READINESS.md`. A clean committed archive and final
-website/browser check are required before restoring a scoped pass.
+The current readiness decision is **PASS WITH KNOWN LIMITATIONS; REVALIDATED AFTER
+REOPENING** for the documented conservative contract on the directly validated
+Linux toolchain. See `PRODUCTION-READINESS.md`. Reopen it again whenever supported
+behavior or contradictory production evidence changes.
 
 ## After production
 

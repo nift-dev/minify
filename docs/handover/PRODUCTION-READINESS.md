@@ -2,14 +2,14 @@
 
 ## Current decision
 
-**REOPENED; REPAIRED CANDIDATE UNDER FINAL REVALIDATION — 2026-08-16**
+**PASS WITH KNOWN LIMITATIONS; REVALIDATED AFTER REOPENING — 2026-08-16**
 
 The earlier pass was withdrawn when Minify++ corrupted ordinary production CSS in
-its own website. The repaired candidate has substantially stronger evidence and
-all executable gates available on the working tree are green, but the readiness
-decision remains reopened until a clean committed source-package `distcheck` and
-final website/browser validation are rerun. Do not quote the earlier pass as the
-current release decision.
+its own website. The repaired implementation now has substantially stronger
+evidence: all executable gates are green, the clean committed source archive
+builds and passes its complete suite, and the rebuilt website passes final browser
+layout/content validation. This restores a scoped pass; it does not erase the
+incident or turn finite evidence into universal correctness.
 
 ## Candidate identity and environment
 
@@ -49,15 +49,15 @@ format scanners accepted unterminated quotes ending at a misleading `>` byte.
 Every finding is now retained as a focused regression. This history is evidence
 that passing finite gates does not make the decision irreversible.
 
-## Remaining close-out evidence
+## Completed close-out evidence
 
-- commit the coherent standalone and embedded changes, then run `make distcheck`
-  against the resulting clean archive (the workflow intentionally refuses a dirty
-  tree, so it cannot validate uncommitted source);
-- rebuild the Minify++ website with the repaired embedded engine and verify the
-  result in a browser, including layout width and representative computed styles;
-- reconcile public website maturity claims with the reopened audit and final
-  decision.
+- committed the coherent standalone and embedded repairs and portable oracle
+  harnesses;
+- `make distcheck` built the clean `git archive` and passed the complete suite;
+- rebuilt the Minify++ website with the repaired embedded engine and verified
+  grid/flex layout, page width, stylesheet behavior, and readiness content in a
+  fresh browser load;
+- reconciled public maturity claims with the defect, reopening, and revalidation.
 
 ## Public safety and failure model
 

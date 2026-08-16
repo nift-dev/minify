@@ -8,6 +8,7 @@ The Makefile's `test` target runs:
 - Node-based semantic comparison;
 - deterministic generated JavaScript semantic programs;
 - generated JSX/TSX syntax and idempotence cases;
+- independent PostCSS CSS semantic-tree comparison when PostCSS is available;
 - non-JavaScript format idempotence;
 - cross-format adversarial/malformed cases;
 - CLI behavior.
@@ -88,7 +89,18 @@ smoke, fuzz-smoke, and CLI transaction suite under ASan/UBSan. On desktop hosts
 where LeakSanitizer is incompatible with process supervision, set
 `ASAN_OPTIONS=detect_leaks=0` and report that limitation explicitly.
 
-The 111-document non-JavaScript corpus, including its Node-backed JSON structural
+The reopened audit also used `FUZZ_CASES=1000000`, producing 7,000,000 mutations
+and finding JavaScript comment-delimiter synthesis plus JSX roots incorrectly
+located inside JavaScript comments. The ASan/UBSan campaign also passed all
+7,000,000 cases. Use large campaigns as periodic evidence; keep the fast default suitable for
+ordinary development.
+
+`make test-css-semantics` compiles a CSS-only driver and, when PostCSS plus its
+selector/value parsers are installed, compares normalized semantic trees for
+original and minified representative modern stylesheets. It is deliberately
+independent of Minify++ and complements rather than replaces focused exact tests.
+
+The 115-document non-JavaScript corpus, including its Node-backed JSON structural
 oracle, passed in an unrestricted process environment during the production audit.
 The desktop process wrapper may stall that final `spawnSync` oracle; rerun it
 outside that wrapper rather than silently omitting the result.

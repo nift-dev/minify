@@ -27,18 +27,23 @@ Reorder or retire these items as implementation evidence changes.
 
 ## Current checkpoint status
 
-- **COMPLETE — production-readiness audit:** all current standalone gates pass,
+- **REOPENED — production-readiness audit:** a production website CSS failure
+  invalidated the earlier finality claim. The repaired working candidate passes
+  all current standalone gates, including a new independent CSS semantic oracle,
+  but still needs clean-archive and final browser close-out evidence.
+- **COMPLETE — current executable evidence:** all current standalone gates pass,
   including 15,459 executable JavaScript programs, 180 JSX/TSX programs, and the
-  111-document non-JavaScript corpus with JSON structural comparison. The latter
+  115-document non-JavaScript corpus with JSON structural comparison. The latter
   was rerun successfully outside the desktop stream wrapper.
-- **COMPLETE — synchronization evidence:** a 19-file standalone/Nift equality
+- **COMPLETE — synchronization evidence:** a 20-file standalone/Nift equality
   gate now makes embedded drift machine-checkable.
 - **COMPLETE — bounded CLI hardening:** checked reads distinguish failure from
   empty input; sibling-temporary replacement preserves existing permission bits,
   rejects symbolic-link destinations, and has CLI regression coverage.
-- **COMPLETE — native/tooling evidence:** repeatable sanitizer, 70,000-case
-  fuzz-smoke, and performance/output-size/RSS targets are green. The fuzz gate
-  exposed three token-manufacturing families, now fixed and retained.
+- **COMPLETE — current native/tooling evidence:** repeatable sanitizer,
+  7,000,000-case ordinary and sanitized fuzz campaigns, and
+  performance/output-size/RSS targets are green. The enlarged campaign exposed
+  JavaScript comment-delimiter and JSX comment/root failures, now retained.
 - **COMPLETE — clean package evidence:** the committed source archive builds and
   passes the full suite without developer-local or generated inputs; `distcheck`
   makes the workflow repeatable.
@@ -76,10 +81,9 @@ future syntax.
 8. Reconcile documentation, website maturity language, limits, tests, and claims.
 9. Validate a clean release-like package and decide production status with Nick.
 
-The current readiness decision is **PASS WITH KNOWN LIMITATIONS** for the documented
-conservative format/API/CLI contract on the directly validated Linux toolchain.
-See `PRODUCTION-READINESS.md`. Reopen the decision when supported syntax, scanner
-semantics, CLI commit behavior, platform claims, or significant evidence changes.
+The current readiness decision is **REOPENED; REPAIRED CANDIDATE UNDER FINAL
+REVALIDATION**. See `PRODUCTION-READINESS.md`. A clean committed archive and final
+website/browser check are required before restoring a scoped pass.
 
 ## After production
 

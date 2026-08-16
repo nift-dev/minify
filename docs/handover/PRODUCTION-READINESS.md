@@ -2,13 +2,14 @@
 
 ## Current decision
 
-**PASS WITH KNOWN LIMITATIONS — 2026-08-16**
+**REOPENED; REPAIRED CANDIDATE UNDER FINAL REVALIDATION — 2026-08-16**
 
-Minify++ is production-ready for deliberate use within its documented conservative
-HTML, CSS, JavaScript, JSX, JSON, XML, and SVG format/API/CLI contract on the
-directly validated Linux toolchain. This is a maintained evidence judgment, not a
-claim of universal semantic equivalence, smallest possible output, support for all
-future syntax, or validation on platforms not actually exercised.
+The earlier pass was withdrawn when Minify++ corrupted ordinary production CSS in
+its own website. The repaired candidate has substantially stronger evidence and
+all executable gates available on the working tree are green, but the readiness
+decision remains reopened until a clean committed source-package `distcheck` and
+final website/browser validation are rerun. Do not quote the earlier pass as the
+current release decision.
 
 ## Candidate identity and environment
 
@@ -27,22 +28,36 @@ future syntax, or validation on platforms not actually exercised.
 - focused C++ tests for all seven formats and minimized historical/fuzz findings;
 - 15,459 executable JavaScript differential programs;
 - 180 JSX/TSX parse-and-idempotence programs;
-- 111 generated non-JavaScript documents, including JSON structural equivalence;
+- 115 generated non-JavaScript documents, including JSON structural equivalence;
+- 16 representative CSS stylesheets compared through an independent normalized
+  PostCSS semantic-tree oracle;
 - cross-format adversarial/malformed cases and CLI transaction tests;
-- deterministic 70,000-case mutation gate across all formats;
+- deterministic 7,000,000-case mutation campaigns across all formats under both
+  the ordinary and ASan/UBSan builds;
 - ASan, UBSan, and LeakSanitizer runs of direct, mutation, and CLI workloads with
   no findings in the unrestricted release-like environment;
 - per-format benchmark covering 0.71–1.16 MB inputs over 20 iterations, measuring
   roughly 62–409 MiB/s and 21 MiB aggregate peak RSS on the stated host;
-- exact 19-file standalone/Nift synchronization gate;
+- exact 20-file standalone/Nift synchronization gate;
 - green Nift opt-in minification integration;
 - Minify++ website rebuilt successfully from reconciled source documentation.
 
-The mutation layer materially increased confidence by discovering three genuine
-token-manufacturing families before this decision: CSS `/ *` joining into a
-comment, JSX-mode `< name` joining into an opener, and malformed HTML/XML prefixes
-joining into comment/CDATA-like syntax. All were fixed conservatively and retained
-as focused regressions before the complete evidence wall was rerun.
+The reopened audit found additional genuine families: ordinary CSS component and
+selector boundaries were merged; JavaScript spacing could manufacture block-comment
+delimiters; the JSX root finder scanned inside JavaScript comments; and several
+format scanners accepted unterminated quotes ending at a misleading `>` byte.
+Every finding is now retained as a focused regression. This history is evidence
+that passing finite gates does not make the decision irreversible.
+
+## Remaining close-out evidence
+
+- commit the coherent standalone and embedded changes, then run `make distcheck`
+  against the resulting clean archive (the workflow intentionally refuses a dirty
+  tree, so it cannot validate uncommitted source);
+- rebuild the Minify++ website with the repaired embedded engine and verify the
+  result in a browser, including layout width and representative computed styles;
+- reconcile public website maturity claims with the reopened audit and final
+  decision.
 
 ## Public safety and failure model
 

@@ -86,6 +86,13 @@ Preserve the method, not merely the specimens:
 6. Make readiness claims only after all relevant gates are green.
 7. Feed the result back into the roadmap and living handovers.
 
+The later website-driven reopening reinforced the same method. A real stylesheet
+showed that idempotence alone can preserve the same wrong output, so CSS now has an
+independent semantic-tree comparison. A 7,000,000-case continuation then exposed
+JavaScript delimiter synthesis and JSX comment/root confusion. Production status
+is therefore a revocable evidence judgment, not a milestone that suppresses new
+contradictory evidence.
+
 The permanent low-risk property is second-pass acceptance after every successful
 first pass. Strict byte idempotence is a separate possible contract and must not
 be inferred without a deliberate seven-format audit.

@@ -80,6 +80,14 @@ valid seeds and malformed inputs, detect crashes/hangs/unbounded memory, minimiz
 findings, and convert them into deterministic regressions. Runtime differential
 fuzzing is especially valuable for supported JavaScript.
 
+`make test-fuzz` deterministically mutates valid seeds for all seven formats and
+requires every successful first-pass output to remain accepted on a second pass.
+Its default 70,000 cases found three token-manufacturing bugs during introduction;
+each was minimized into `minify_smoke.cpp`. `make test-sanitize` runs the direct
+smoke, fuzz-smoke, and CLI transaction suite under ASan/UBSan. On desktop hosts
+where LeakSanitizer is incompatible with process supervision, set
+`ASAN_OPTIONS=detect_leaks=0` and report that limitation explicitly.
+
 The 111-document non-JavaScript corpus, including its Node-backed JSON structural
 oracle, passed in an unrestricted process environment during the production audit.
 The desktop process wrapper may stall that final `spawnSync` oracle; rerun it
@@ -106,3 +114,11 @@ semantics rather than scanner output.
 Measure startup, many small files, large files, per-format throughput, peak RSS,
 and output size using semantically green candidates. Record machine, compiler
 flags, corpus, iterations, and tool versions. Report tradeoffs honestly.
+
+`make benchmark` builds deterministic large inputs for all seven formats and
+reports input/output bytes, median time, throughput, and Linux peak RSS where
+`/usr/bin/time` is available. It is a regression checkpoint, not a competitor
+comparison. The first production-audit reference on g++ 15.2.0 measured roughly
+62–409 MiB/s across formats and 21 MiB peak RSS for the aggregate process; retain
+the exact CSV output when making future comparisons rather than treating that
+range as a promise.

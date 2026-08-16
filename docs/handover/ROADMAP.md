@@ -31,13 +31,16 @@ Reorder or retire these items as implementation evidence changes.
   including 15,459 executable JavaScript programs, 180 JSX/TSX programs, and the
   111-document non-JavaScript corpus with JSON structural comparison. The latter
   was rerun successfully outside the desktop stream wrapper.
-- **COMPLETE — synchronization evidence:** a 16-file standalone/Nift equality
+- **COMPLETE — synchronization evidence:** an 18-file standalone/Nift equality
   gate now makes embedded drift machine-checkable.
 - **COMPLETE — bounded CLI hardening:** checked reads distinguish failure from
   empty input; sibling-temporary replacement preserves existing permission bits,
   rejects symbolic-link destinations, and has CLI regression coverage.
-- **PLANNED — native/tooling evidence:** add repeatable sanitizer, fuzz-smoke,
-  performance/RSS, and clean-checkout gates before the readiness decision.
+- **COMPLETE — native/tooling evidence:** repeatable sanitizer, 70,000-case
+  fuzz-smoke, and performance/output-size/RSS targets are green. The fuzz gate
+  exposed three token-manufacturing families, now fixed and retained.
+- **PLANNED — clean package/platform evidence:** prove a source-only checkout,
+  document the validated host/toolchain, and keep broader platform claims bounded.
 - **PLANNED — public reconciliation:** correct the website's stale 39-document
   claim to the current 111-document evidence and publish only defensible maturity
   language.

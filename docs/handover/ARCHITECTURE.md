@@ -81,7 +81,7 @@ These are pressures to monitor rather than automatic redesign tasks:
   existing permission bits, and reject symbolic-link destinations; broader
   platform rename/durability evidence remains a release concern;
 - standalone and embedded byte equality is enforced on demand by the explicit
-  16-file `check-nift-sync` gate; running it remains a checkpoint responsibility;
+  18-file `check-nift-sync` gate; running it remains a checkpoint responsibility;
 - structured error offsets may eventually improve CLI/Nift diagnostics without
   requiring a large error hierarchy.
 
@@ -166,7 +166,7 @@ durability across power loss and ownership/timestamp preservation are not claime
 
 ### Verified Nift relationship
 
-The 16 mirrored standalone contract files—source, public header, private JSON
+The 18 mirrored standalone contract files—source, public header, private JSON
 parser, CLI, Makefile, README, release notes, sync script, and all tests—are
 currently byte-identical to their counterparts under Nift's minifypp subtree.
 The embedded directory additionally contains local build artifacts. Run
@@ -211,11 +211,14 @@ unrestricted process environment. The same oracle can stall under the Codex
 desktop process wrapper's stream restrictions; retain that as an execution-
 environment limitation, not a skipped product result.
 
-There are no checked-in benchmark sources or Make targets for benchmarks,
-sanitizers, or fuzzing in the standalone repository. The architecture's performance
-model, ASan/UBSan expectations, and fuzz recommendations are therefore roadmap
-requirements rather than existing evidence. The Makefile does enforce C++17,
--O2, -Wall, -Wextra, and -pedantic.
+The repository contains repeatable deterministic multi-format fuzz-smoke,
+ASan/UBSan, and per-format throughput/output-size/RSS benchmark targets. The
+production audit's 70,000-case sanitizer run found and helped minimize three
+token-manufacturing families: CSS comment delimiters, JSX openers, and HTML/XML
+comment/CDATA-like prefixes. All retained cases and the full sanitizer workload
+are green. The Makefile enforces C++17, `-O2`, `-Wall`, `-Wextra`, and `-pedantic`
+for ordinary builds; the sanitizer target uses `-O1`, debug symbols, ASan, UBSan,
+and frame pointers.
 
 ### Reconciliation conclusions
 
@@ -231,9 +234,9 @@ It was stale or incomplete in four important ways:
 4. Atomic output replacement, sanitizer/fuzz targets, and retained benchmarks are
    desired architecture but not current implementation.
 
-The highest-value next architecture work is to harden file reads and atomic
-replacement semantics and establish sanitizer/fuzz/performance targets. Scanner
-semantic changes should still begin with evidence, not rewrites.
+The highest-value remaining architecture work is clean-package/platform evidence
+and candid release review. Scanner semantic changes should still begin with
+evidence, not rewrites.
 
 ## Product and architectural boundary
 

@@ -129,3 +129,15 @@ These are living project documents. Review them when format behavior, public API
 tests/corpora, synchronization, release workflow, product boundaries, or durable
 lessons change. Correct and consolidate rather than appending a diary. A
 substantial checkpoint must review handover and production-roadmap impact.
+
+## Competitive benchmark checkpoint (2026-08-18)
+
+Benchmarking now has three deliberately separate layers:
+
+- `make benchmark` remains the in-process seven-format regression gate;
+- `benchmarks/run_css_fixture_benchmark.sh <css-file>...` measures real CSS fixtures via the C++ API;
+- `benchmarks/compare_css_tools.py` performs same-host process-inclusive CLI comparisons with optional esbuild and Lightning CSS binaries.
+
+The retained CSS comparison used the GoalSmashers Bootstrap 4, Animate.css 4.1.1 and Tailwind fixtures. Minify++ output was 165,836, 77,454 and 1,973,801 bytes. The public site compares those bytes with the values published by Lightning CSS for esbuild and Lightning CSS, but deliberately does not mix upstream timings from another host/API path with local Minify++ timings. `benchmarks/privatenumber_nift_adapter.ts` is a reference adapter for adding Nift to `privatenumber/minification-benchmarks`; no upstream Nift leaderboard result is claimed until that suite is actually run on its current artifacts. A local 515,136-byte JS integration probe confirmed standalone Minify++ and `nift minify` produced byte-identical output.
+
+Treat this separation as durable methodology: output-size comparisons can be cross-host when the exact input/tool output is fixed, but speed comparisons require the same host and a comparable invocation boundary.

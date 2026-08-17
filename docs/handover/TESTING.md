@@ -131,7 +131,22 @@ flags, corpus, iterations, and tool versions. Report tradeoffs honestly.
 `make benchmark` builds deterministic large inputs for all seven formats and
 reports input/output bytes, median time, throughput, and Linux peak RSS where
 `/usr/bin/time` is available. It is a regression checkpoint, not a competitor
-comparison. The first production-audit reference on g++ 15.2.0 measured roughly
-62–409 MiB/s across formats and 21 MiB peak RSS for the aggregate process; retain
-the exact CSV output when making future comparisons rather than treating that
-range as a promise.
+comparison. Retain exact CSV output with the host/compiler instead of treating an
+old throughput range as a promise.
+
+For real CSS fixtures, `benchmarks/run_css_fixture_benchmark.sh <css-file>...` runs the
+C++ API with warmups and median sampling. `benchmarks/compare_css_tools.py` is a
+separate same-host CLI harness for Minify++, esbuild and Lightning CSS. Never mix
+its process-inclusive wall-clock results with another project's in-process timing
+and call that a speed ratio. `benchmarks/privatenumber_nift_adapter.ts` records the
+intended adapter for testing Nift in `privatenumber/minification-benchmarks`; only
+publish a Nift rank after the actual upstream suite runs against its exact current
+artifacts.
+
+The 2026-08-18 comparison checkpoint used the GoalSmashers Bootstrap 4,
+Animate.css 4.1.1 and Tailwind fixtures. Minify++ produced 165,836 / 77,454 /
+1,973,801 bytes respectively. In-process medians on Linux 6.18.35 x86-64,
+g++ 14.2.0 `-O2`, were 1.156 / 0.517 / 12.843 ms over 45 measured iterations after
+five warmups. Lightning CSS's published benchmark provides esbuild/Lightning CSS
+output-size context for those fixture names; its timings are not same-host
+measurements and must not be combined with these local medians as a speed ranking.

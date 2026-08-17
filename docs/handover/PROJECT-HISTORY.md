@@ -669,3 +669,9 @@ declare production based on line count
 
 ---
 
+
+# 31. Competitive benchmark tooling and external-context checkpoint (2026-08-18)
+
+The benchmark story was split into explicit layers instead of forcing every number into one chart. The existing generated-fixture API benchmark remains a self-regression gate. A real-CSS API benchmark and a same-host CLI comparison harness were added for Bootstrap/Animate/Tailwind style workloads, and a reference adapter was prepared for running Nift in the external `privatenumber/minification-benchmarks` JavaScript suite.
+
+The checkpoint reinforced a durable communication rule: **compare output sizes directly when the exact fixture/result is fixed, but compare speeds only when host and invocation boundary are comparable.** Published Lightning CSS/esbuild timings from another environment are useful context, not a denominator for a Minify++ speedup claim. The public website gained a Benchmarks page built around that distinction.

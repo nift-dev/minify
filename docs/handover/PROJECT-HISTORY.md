@@ -675,3 +675,12 @@ declare production based on line count
 The benchmark story was split into explicit layers instead of forcing every number into one chart. The existing generated-fixture API benchmark remains a self-regression gate. A real-CSS API benchmark and a same-host CLI comparison harness were added for Bootstrap/Animate/Tailwind style workloads, and a reference adapter was prepared for running Nift in the external `privatenumber/minification-benchmarks` JavaScript suite.
 
 The checkpoint reinforced a durable communication rule: **compare output sizes directly when the exact fixture/result is fixed, but compare speeds only when host and invocation boundary are comparable.** Published Lightning CSS/esbuild timings from another environment are useful context, not a denominator for a Minify++ speedup claim. The public website gained a Benchmarks page built around that distinction.
+
+The follow-up definitive checkpoint ran current stable CSS competitors on the
+same i7-12700H host and joined the current upstream JavaScript suite with Nift's
+real file-oriented adapter. It confirmed the intended tradeoff rather than a
+simple victory: Minify++ led the tested CSS CLI medians, while Lightning CSS
+made every CSS fixture smaller; Nift passed all upstream JavaScript integrity
+checks but placed last under the suite's size-heavy score. Raw samples/results,
+tool versions, failures, provenance and environment were retained so the website
+charts remain interpretations rather than the only evidence.

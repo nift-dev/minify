@@ -135,7 +135,7 @@ comparison. Retain exact CSV output with the host/compiler instead of treating a
 old throughput range as a promise.
 
 For real CSS fixtures, `benchmarks/run_css_fixture_benchmark.sh <css-file>...` runs the
-C++ API with warmups and median sampling. `benchmarks/compare_css_tools.py` is a
+C++ API with warmups and median sampling. `benchmarks/run_css_competitive.py` is a
 separate same-host CLI harness for Minify++, esbuild and Lightning CSS. Never mix
 its process-inclusive wall-clock results with another project's in-process timing
 and call that a speed ratio. `benchmarks/privatenumber_nift_adapter.ts` records the
@@ -150,3 +150,9 @@ g++ 14.2.0 `-O2`, were 1.156 / 0.517 / 12.843 ms over 45 measured iterations aft
 five warmups. Lightning CSS's published benchmark provides esbuild/Lightning CSS
 output-size context for those fixture names; its timings are not same-host
 measurements and must not be combined with these local medians as a speed ranking.
+
+The definitive competitive evidence is machine-readable rather than copied from
+terminal summaries. Preserve raw timing samples before deriving medians/charts,
+retain upstream failures and timeouts, and test public tables against their JSON
+source. The 2026-08-18 same-host CSS result and upstream Nift JavaScript snapshot
+are retained under `benchmarks/results/`.

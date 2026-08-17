@@ -136,8 +136,23 @@ Benchmarking now has three deliberately separate layers:
 
 - `make benchmark` remains the in-process seven-format regression gate;
 - `benchmarks/run_css_fixture_benchmark.sh <css-file>...` measures real CSS fixtures via the C++ API;
-- `benchmarks/compare_css_tools.py` performs same-host process-inclusive CLI comparisons with optional esbuild and Lightning CSS binaries.
+- `benchmarks/run_css_competitive.py` performs same-host process-inclusive CLI comparisons with pinned esbuild and Lightning CSS binaries and preserves raw samples.
 
 The retained CSS comparison used the GoalSmashers Bootstrap 4, Animate.css 4.1.1 and Tailwind fixtures. Minify++ output was 165,836, 77,454 and 1,973,801 bytes. The public site compares those bytes with the values published by Lightning CSS for esbuild and Lightning CSS, but deliberately does not mix upstream timings from another host/API path with local Minify++ timings. `benchmarks/privatenumber_nift_adapter.ts` is a reference adapter for adding Nift to `privatenumber/minification-benchmarks`; no upstream Nift leaderboard result is claimed until that suite is actually run on its current artifacts. A local 515,136-byte JS integration probe confirmed standalone Minify++ and `nift minify` produced byte-identical output.
 
 Treat this separation as durable methodology: output-size comparisons can be cross-host when the exact input/tool output is fixed, but speed comparisons require the same host and a comparable invocation boundary.
+
+The definitive same-host checkpoint on the i7-12700H host used Minify++ 1.1.0,
+esbuild 0.28.2 and lightningcss-cli 1.33.0 for 45 CLI samples after five
+warmups. Minify++ had the lowest median CLI latency on all three fixtures;
+Lightning CSS produced the smallest output on all three. Raw samples, gzip
+sizes, commands and environment are retained in
+`benchmarks/results/2026-08-18-css-competitive.json`.
+
+The upstream JavaScript run used Nift 4.0.2 commit `aa60ab3` against
+`privatenumber/minification-benchmarks` commit `fe89864f…`. Nift passed all 12
+artifacts and five runs each, but ranked last among successful entries under the
+upstream size-heavy score because conservative Minify++ output was larger. The
+integrated CLI boundary and large-input latency rise are part of the result.
+JShrink was unavailable without PHP/Composer and Closure failed without Java;
+never describe either as measured successfully on this host.

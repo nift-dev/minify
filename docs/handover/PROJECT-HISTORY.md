@@ -684,3 +684,7 @@ made every CSS fixture smaller; Nift passed all upstream JavaScript integrity
 checks but placed last under the suite's size-heavy score. Raw samples/results,
 tool versions, failures, provenance and environment were retained so the website
 charts remain interpretations rather than the only evidence.
+
+## 2026-08-18 — Jsonic++ parser ownership
+
+The private `src/Json.h` used by Minify++ was recognized as the same byte-identical parser used by Nift core and extracted into standalone Jsonic++. Minify++ continues to vendor the header privately to preserve its dependency-free distribution, but parser semantics now originate in Jsonic++; Minify++ owns minification behavior and must rerun its full semantic corpus after parser synchronization.

@@ -40,7 +40,7 @@ explained and tested.
 ## Architecture and Nift relationship
 
 - Public library API: `include/minify/Minify.h`.
-- Implementation: `src/Minify.cpp` and private `src/Json.h`.
+- Implementation: `src/Minify.cpp` and private vendored `src/Json.h`.
 - CLI wrapper: `cli/main.cpp`.
 - Tests: `tests/`.
 - Nift embeds a standalone-style copy under `nift/minifypp/` and consumes only the
@@ -57,6 +57,12 @@ rather than forcing every file to match.
 Nift minification is opt-in by configured extension and occurs at the final-output
 boundary. Minify++ does not depend on Nift's parser, tracking state, or build
 engine.
+
+The private `src/Json.h` is also a synchronized vendored copy of standalone
+**Jsonic++** `include/json.h`. Jsonic++ owns parser semantics; Minify++ owns the
+minifier behavior that consumes it. Parser changes should originate in Jsonic++,
+pass its standalone tests, synchronize here, then pass the complete Minify++
+format/semantic corpus before Nift's embedded Minify++ copy is reconciled.
 
 ## Build and tests
 

@@ -666,3 +666,7 @@ Keep this document living. When a scanner assumption changes, update code, tests
 the support matrix, this architecture, and the production roadmap. The objective
 is not to preserve this description; it is to explain accurately why a very small
 implementation is safe enough to trust.
+
+## Jsonic++ relationship
+
+`src/Json.h` is a vendored copy of standalone Jsonic++ `include/json.h`, not an independently evolving parser. This keeps Minify++ self-contained while giving JSON grammar/conformance work one canonical owner.

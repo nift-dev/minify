@@ -37,6 +37,11 @@ test-sanitize:
 	$(CXX) $(CPPFLAGS) -std=c++17 -Wall -Wextra -pedantic $(SANITIZER_FLAGS) cli/main.cpp $(LIBSRC) -o $(TESTDIR)/minify-sanitize
 	MINIFY_BIN="$(CURDIR)/$(TESTDIR)/minify-sanitize" bash tests/cli_smoke.sh
 
+memory-safety-smoke:
+	mkdir -p $(TESTDIR)/memory-safety
+	$(CXX) $(CPPFLAGS) -std=c++17 -Wall -Wextra -pedantic $(SANITIZER_FLAGS) tests/minify_smoke.cpp $(LIBSRC) -o $(TESTDIR)/minifypp-memory-san
+	python3 scripts/memory_safety.py --project minify++ --mode sanitizer --output $(TESTDIR)/memory-safety/checkpoint-0.json --iterations 2 --command './$(TESTDIR)/minifypp-memory-san'
+
 benchmark:
 	mkdir -p $(TESTDIR)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) benchmarks/minify_benchmark.cpp $(LIBSRC) -o $(TESTDIR)/minifypp-benchmark
@@ -72,7 +77,7 @@ test-cli: $(TARGET)
 clean:
 	rm -rf $(TESTDIR) $(TARGET)
 
-.PHONY: all test check-nift-sync test-smoke test-node test-generated test-jsx test-css-semantics test-formats test-cross-format test-cli test-fuzz test-sanitize benchmark distcheck clean
+.PHONY: all test check-nift-sync test-smoke test-node test-generated test-jsx test-css-semantics test-formats test-cross-format test-cli test-fuzz test-sanitize memory-safety-smoke benchmark distcheck clean
 
 test-formats:
 	bash tests/minify_format_idempotence.sh

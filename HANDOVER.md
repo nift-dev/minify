@@ -169,3 +169,9 @@ never describe either as measured successfully on this host.
 - No production Minify++ implementation change was required. The independent Valgrind target remains the Checkpoint 2B exit gate and is still open because Valgrind is unavailable in the current environment.
 - Retained machine-readable Checkpoint 2A evidence lives under `docs/evidence/memory-safety-checkpoint-2a-*.json`; keep the public memory-safety page synchronized with those records.
 - Nift-owned Minify++ integration stress is deliberately deferred to the cross-project memory checkpoint; standalone/Nift source synchronization remains required here.
+
+## 2026-08-18 — memory-safety Checkpoint 2B complete
+
+- Independent Linux confirmation is complete at Minify++ commit `2a51a38`: Valgrind 3.26.0 ran 30 maintained lifetime-corpus iterations with 0 errors, 0 bytes in use at exit, all 2,448 allocations freed, and no leaks possible. Peak Valgrind process RSS was 184,908 KiB.
+- Exact machine-readable evidence is retained at `docs/evidence/memory-safety-checkpoint-2b-valgrind.json`. Together with the clean sanitizer corpus, stable native RSS soak, CLI stress and deterministic fuzz corpus, this closes the standalone Minify++ memory/lifetime checkpoint without a production source repair.
+- Proceed next to Nift core lifecycle memory testing. Sustained Nift-owned Minify++/Jsonic++ integration pressure remains deliberately deferred to the later cross-project checkpoint.

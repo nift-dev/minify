@@ -167,4 +167,5 @@ never describe either as measured successfully on this host.
 - Added a maintained long-lived seven-format API corpus and mixed-file CLI stress harness. At commit `db2a6ff`, 80 ASan/LSan/UBSan corpus iterations completed with zero findings; the 300-iteration native soak stabilized at 7,160 KiB RSS after a 7,096 KiB warm-up observation.
 - Sanitized CLI stress passed 8×42 files and the native CLI soak passed 30×70 files, including in-place replacement and controlled mixed valid/invalid batch cleanup. The deterministic sanitizer fuzz corpus also passed 70,000 cases.
 - No production Minify++ implementation change was required. The independent Valgrind target remains the Checkpoint 2B exit gate and is still open because Valgrind is unavailable in the current environment.
+- Retained machine-readable Checkpoint 2A evidence lives under `docs/evidence/memory-safety-checkpoint-2a-*.json`; keep the public memory-safety page synchronized with those records.
 - Nift-owned Minify++ integration stress is deliberately deferred to the cross-project memory checkpoint; standalone/Nift source synchronization remains required here.

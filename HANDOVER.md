@@ -162,3 +162,9 @@ upstream size-heavy score because conservative Minify++ output was larger. The
 integrated CLI boundary and large-input latency rise are part of the result.
 JShrink was unavailable without PHP/Composer and Closure failed without Java;
 never describe either as measured successfully on this host.
+## 2026-08-18 — memory-safety Checkpoint 2A
+
+- Added a maintained long-lived seven-format API corpus and mixed-file CLI stress harness. At commit `db2a6ff`, 80 ASan/LSan/UBSan corpus iterations completed with zero findings; the 300-iteration native soak stabilized at 7,160 KiB RSS after a 7,096 KiB warm-up observation.
+- Sanitized CLI stress passed 8×42 files and the native CLI soak passed 30×70 files, including in-place replacement and controlled mixed valid/invalid batch cleanup. The deterministic sanitizer fuzz corpus also passed 70,000 cases.
+- No production Minify++ implementation change was required. The independent Valgrind target remains the Checkpoint 2B exit gate and is still open because Valgrind is unavailable in the current environment.
+- Nift-owned Minify++ integration stress is deliberately deferred to the cross-project memory checkpoint; standalone/Nift source synchronization remains required here.

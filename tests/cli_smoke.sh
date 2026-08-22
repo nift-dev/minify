@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+trap 'echo "minifier CLI smoke failed at line $LINENO" >&2' ERR
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 BIN="${MINIFY_BIN:-$ROOT/minify}"
 TMP=$(mktemp -d "${TMPDIR:-/tmp}/nift-minifier-cli.XXXXXX")
@@ -18,8 +19,13 @@ test ! -e "$TMP/site.min.css"
 printf 'const  executable =  true ;\n' >"$TMP/tool.js"
 chmod 755 "$TMP/tool.js"
 "$BIN" --in-place "$TMP/tool.js" >/dev/null
-test -x "$TMP/tool.js"
 grep -Fxq 'const executable=true;' "$TMP/tool.js"
+# Executable-bit preservation is a POSIX permission contract; Windows has no
+# exec bit visible to std::filesystem, so the -x assertion is POSIX-only.
+case "$(uname -s)" in
+    MINGW*|MSYS*) ;;
+    *) test -x "$TMP/tool.js" ;;
+esac
 
 : >"$TMP/empty.js"
 "$BIN" "$TMP/empty.js" >/dev/null

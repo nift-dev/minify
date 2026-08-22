@@ -21,7 +21,6 @@ jobs:
       - name: Install test oracles
         run: |
           npm install -g typescript
-        if: runner.os == 'Linux'
       - name: Build
         run: make -j2
       - name: Test
@@ -36,6 +35,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
       - uses: msys2/setup-msys2@v2
         with:
           msystem: UCRT64
@@ -45,6 +47,5 @@ jobs:
       - name: Build and test (msys2)
         shell: msys2 {0}
         run: |
-          export PATH="$PATH:/c/Program Files/nodejs"
           make -j2
           make test

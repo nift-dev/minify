@@ -49,7 +49,11 @@ fi
 cmp "$TMP/bad.json" "$TMP/original"
 test ! -e "$TMP/bad.min.json"
 
-if ln -s "$TMP/app.js" "$TMP/link.js" 2>/dev/null; then
+# Only run the symlink-refusal check when a real symlink was actually created:
+# some environments (e.g. msys2 without symlink privileges) silently fall back
+# to a copy, in which case the destination is a regular file and replacement is
+# the correct behavior.
+if ln -s "$TMP/app.js" "$TMP/link.js" 2>/dev/null && test -L "$TMP/link.js"; then
   cp "$TMP/app.js" "$TMP/link-target.before"
   if "$BIN" --in-place "$TMP/link.js" >"$TMP/link.log" 2>&1; then
     echo 'in-place symbolic-link destination unexpectedly replaced' >&2; exit 1
